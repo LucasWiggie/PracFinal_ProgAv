@@ -30,9 +30,7 @@ void Game::Init() {
 }
 
 void Game::Render() {
-	
 	activeScene->Render();
-
 }
 
 void Game::Update() {

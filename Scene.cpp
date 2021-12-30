@@ -2,9 +2,7 @@
 #include <iostream>
 
 void Scene::addGameObject(Solid* ptr) {
-	
 	this->gameObjects.push_back(ptr);
-
 }
 
 void Scene::Render() {

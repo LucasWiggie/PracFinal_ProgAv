@@ -118,6 +118,6 @@ void ModelLoader::clear(){
 	
 	vertexList.clear();
 	normalList.clear();
-	model.getTriangleList().clear();
+	model.clear();
 
 }

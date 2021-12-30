@@ -102,6 +102,9 @@
     <ClCompile Include="Text.cpp">
       <Filter>Archivos de origen\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>Archivos de origen\Coche101</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -128,9 +131,6 @@
     <ClInclude Include="Color.h">
       <Filter>Archivos de encabezado\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3D.h">
-      <Filter>Archivos de encabezado\Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Archivos de encabezado\Coche101</Filter>
     </ClInclude>
@@ -147,6 +147,12 @@
       <Filter>Archivos de encabezado\Coche101</Filter>
     </ClInclude>
     <ClInclude Include="Border.h">
+      <Filter>Archivos de encabezado\Coche101</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>Archivos de encabezado\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle.h">
       <Filter>Archivos de encabezado\Coche101</Filter>
     </ClInclude>
   </ItemGroup>
