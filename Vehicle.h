@@ -6,6 +6,7 @@ class Vehicle : public Solid
 {
 private:
 	Model* modelPtr;
+	int lane;
 
 public:
 	Vehicle() : modelPtr(nullptr) {};
@@ -20,8 +21,16 @@ public:
 		return modelPtr;
 	}
 
+	inline int getLane() {
+		return this->lane;
+	}
+
 	inline void setModel(Model* newModel) {
 		this->modelPtr = newModel;
+	}
+
+	inline void setLane(int newLane) {
+		this->lane = newLane;
 	}
 
 	void Render();

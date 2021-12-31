@@ -19,14 +19,17 @@ void Game::Init() {
 	
 	// ESCENAS DEL JUEGO
 	// Inicializamos la escena
+	InitScreen* titleScreen = new InitScreen();
+	titleScreen->init();
 	LevelOne* firstLevel = new LevelOne();
 	firstLevel->init();
-
+	
 	// AÑADIR LAS ESCENAS AL JUEGO
 	this->scenes.push_back(firstLevel);
+	this->scenes.push_back(titleScreen);
 
 	// ESCENA ACTIVA
-	activeScene = firstLevel;
+	activeScene = titleScreen;
 }
 
 void Game::Render() {

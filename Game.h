@@ -9,7 +9,8 @@
 #include <chrono>
 #include "Text.h"
 #include "Player.h"
-#include "levelOne.h"
+#include "LevelOne.h"
+#include "InitScreen.h"
 
 using namespace std::chrono;
 

@@ -23,6 +23,7 @@ private:
 	vector<Vector3D> vehicleSpeeds;
 	vector<Vector3D> vehiclePositions;
 	vector<Color> vehicleColors;
+	vector<bool> occupiedLanes;
 
 public:
 	LevelOne() : player(nullptr), road(nullptr), leftBorder(nullptr), rightBorder(nullptr), Scene() {}
@@ -31,5 +32,6 @@ public:
 	void update(const float& time);
 	void processKeyPressed(unsigned char key, int px, int py);
 	void vehicleRandomizer();
+	void vehicleCheck();
 };
 
