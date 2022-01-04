@@ -13,6 +13,10 @@ class InitScreen : public Scene
 {
 private:
 	Text* title;
+	Text* author1;
+	Text* author2;
+	Text* info;
+	Model* background;
 
 public:
 	InitScreen() : Scene() {};

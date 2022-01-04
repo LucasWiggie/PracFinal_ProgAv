@@ -8,6 +8,7 @@
 #include "Vehicle.h"
 #include <vector>
 #include <cstdlib>
+#include <random>
 
 class LevelOne : public Scene
 {
@@ -19,11 +20,11 @@ private:
 	
 	vector<float> boundaries; // Límites del escenario en el que el jugador puede moverse
 	vector<Vehicle*> vehicles;
+	int lanes[3];
 	vector<Model*> vehicleModels;
-	vector<Vector3D> vehicleSpeeds;
-	vector<Vector3D> vehiclePositions;
-	vector<Color> vehicleColors;
-	vector<bool> occupiedLanes;
+	Vector3D vehicleSpeeds[6];
+	Vector3D vehiclePositions[3];
+	Color vehicleColors[6];
 
 public:
 	LevelOne() : player(nullptr), road(nullptr), leftBorder(nullptr), rightBorder(nullptr), Scene() {}

@@ -96,7 +96,6 @@ void mouseClicked(int button, int stage, int x, int y) {
 
 int main(int argc, char** argv)
 {
-
     writeLine("Generando la ventana...");
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);

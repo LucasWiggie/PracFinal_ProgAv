@@ -6,7 +6,7 @@ class Vehicle : public Solid
 {
 private:
 	Model* modelPtr;
-	int lane;
+	Vector3D initPos;
 
 public:
 	Vehicle() : modelPtr(nullptr) {};
@@ -21,16 +21,16 @@ public:
 		return modelPtr;
 	}
 
-	inline int getLane() {
-		return this->lane;
+	inline Vector3D getInitPos() const{
+		return this->initPos;
 	}
 
 	inline void setModel(Model* newModel) {
 		this->modelPtr = newModel;
 	}
 
-	inline void setLane(int newLane) {
-		this->lane = newLane;
+	inline void setInitPos(Vector3D newPos) {
+		this->initPos = newPos;
 	}
 
 	void Render();

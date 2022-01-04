@@ -9,7 +9,7 @@ void InitScreen::init() {
 
 	// VEHÍCULOS
 	ModelLoader* vehicleLoader = new ModelLoader();
-	vehicleLoader->setScale(0.55);
+	vehicleLoader->setScale(0.9);
 	vector<Model*> vehicleModels;
 	
 	vehicleLoader->loadModel("3D\\normalCar1.obj");
@@ -32,28 +32,62 @@ void InitScreen::init() {
 
 	vehicleModels[0]->setCoordinates(Vector3D(-2.0, -2.0, 0.0));
 	vehicleModels[0]->setOrientation(Vector3D(30.0, 20.0, 0.0));
-	vehicleModels[0]->setOrientationSpeed(Vector3D(0.0, 0.05, 0.0));
+	vehicleModels[0]->setOrientationSpeed(Vector3D(0.0, 0.2, 0.0));
 	vehicleModels[0]->paintColor(Color(0.8, 0.8, 0.0));
 
-	vehicleModels[1]->setCoordinates(Vector3D(3.0, 2.0, 0.0));
+	vehicleModels[1]->setCoordinates(Vector3D(3.0, 1.0, 0.0));
 	vehicleModels[1]->setOrientation(Vector3D(-30.0, -20.0, 0.0));
-	vehicleModels[1]->setOrientationSpeed(Vector3D(0.0, 0.0, 0.05));
+	vehicleModels[1]->setOrientationSpeed(Vector3D(0.0, 0.2, 0.05));
 	vehicleModels[1]->paintColor(Color(0.8, 0.0, 0.0));
 
-	vehicleModels[2]->setCoordinates(Vector3D(0.0, 4.0, 0.0));
+	vehicleModels[2]->setCoordinates(Vector3D(-2.0, 2.5, 0.0));
 	vehicleModels[2]->setOrientation(Vector3D(30.0, 20.0, 0.0));
-	vehicleModels[2]->setOrientationSpeed(Vector3D(0.0, 0.05, 0.0));
+	vehicleModels[2]->setOrientationSpeed(Vector3D(0.0, -0.2, -0.2));
 	vehicleModels[2]->paintColor(Color(0.0, 0.0, 0.8));
 
-	// TÍTULO
+	// TEXTO
 	this->title = new Text();
 	string newTitle = "COCHE101";
 	this->title->setText(newTitle);
-	this->title->setCoordinates(Vector3D(0.0, 0.0, 6.0));
+	this->title->setCoordinates(Vector3D(-0.1, 0.0, 6.0));
+	this->title->setColor(Color(1.0, 1.0, 1.0));
+
+	this->author1 = new Text();
+	string newAuthor1 = "Fabio Elias Rengifo Garcia";
+	this->author1->setText(newAuthor1);
+	this->author1->setCoordinates(Vector3D(0.2, -0.15, 6.0));
+	this->author1->setColor(Color(1.0, 1.0, 1.0));
+
+	this->author2 = new Text();
+	string newAuthor2 = "Lucas Rubio Lezana";
+	this->author2->setText(newAuthor2);
+	this->author2->setCoordinates(Vector3D(0.2, -0.21, 6.0));
+	this->author2->setColor(Color(1.0, 1.0, 1.0));
+
+	this->info = new Text();
+	string newInfo = "PULSE 'E' PARA JUGAR";
+	this->info->setText(newInfo);
+	this->info->setCoordinates(Vector3D(0.2, -0.40, 6.0));
+	this->info->setColor(Color(1.0, 1.0, 1.0));
+
+	// FONDO
+	ModelLoader* backgroundLoader = new ModelLoader();
+	backgroundLoader->setScale(10.0);
+	backgroundLoader->loadModel("3D\\sideRoad.obj");
+	Model* backgroundAuxPtr = new Model();
+	*backgroundAuxPtr = backgroundLoader->getModel();
+	this->background = backgroundAuxPtr;
+	this->background->setCoordinates(Vector3D(0.0, 0.0, -3.0));
+	this->background->setOrientation(Vector3D(90.0, 0.0, 0.0));
+	this->background->paintColor(Color(0.0, 0.0, 0.0));
 
 	// AÑADIR OBJETOS
 	this->addGameObject(camera);
 	this->addGameObject(title);
+	this->addGameObject(author1);
+	this->addGameObject(author2);
+	this->addGameObject(info);
+	this->addGameObject(background);
 	for (int i = 0; i < vehicleModels.size(); i++) {
 		this->addGameObject(vehicleModels[i]);
 	}

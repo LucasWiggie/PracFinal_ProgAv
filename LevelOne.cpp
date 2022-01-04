@@ -3,7 +3,7 @@
 void LevelOne :: init() {
 
 	// CÁMARA
-	Vector3D newCameraCoords = Vector3D(0, 0, 24);
+	Vector3D newCameraCoords = Vector3D(0, 0, 6);
 	Vector3D newCameraOrientation = Vector3D(0, 0, 0);
 	Camera* camera = new Camera(newCameraCoords, Color(0, 0, 0), newCameraOrientation, Vector3D(0, 0, 0), Vector3D(0, 0, 0));
 
@@ -99,19 +99,22 @@ void LevelOne :: init() {
 	vehicleLoader->clear();*/
 
 	// Vector de posibles VELOCIDADES en el eje Y
-	vehicleSpeeds.push_back(Vector3D(0.0, -0.05, 0.0));
-	vehicleSpeeds.push_back(Vector3D(0.0, -0.06, 0.0));
-	vehicleSpeeds.push_back(Vector3D(0.0, -0.07, 0.0));
-	vehicleSpeeds.push_back(Vector3D(0.0, -0.04, 0.0));
+	vehicleSpeeds[0] = Vector3D(0.0, -0.03, 0.0);
+	vehicleSpeeds[1] = Vector3D(0.0, -0.05, 0.0);
+	vehicleSpeeds[2] = Vector3D(0.0, -0.075, 0.0);
+	vehicleSpeeds[3] = Vector3D(0.0, -0.1, 0.0);
+	vehicleSpeeds[4] = Vector3D(0.0, -0.12, 0.0);
+	vehicleSpeeds[5] = Vector3D(0.0, -0.14, 0.0);
 
 	// Vector de POSICIONES en el eje X
-	vehiclePositions.push_back(Vector3D(-2.5, 6.0, 0.0));
-	vehiclePositions.push_back(Vector3D(0.0, 6.0, 0.0));
-	vehiclePositions.push_back(Vector3D(2.5, 6.0, 0.0));
-	/*vehiclePositions.push_back(Vector3D(-2.5, 8.0, 0.0));
-	vehiclePositions.push_back(Vector3D(0.0, 8.0, 0.0));
-	vehiclePositions.push_back(Vector3D(2.5, 8.0, 0.0));*/
+	vehiclePositions[0] = Vector3D(-2.5, 6.0, 0.0);
+	vehiclePositions[1] = Vector3D(0.0, 6.0, 0.0);
+	vehiclePositions[2] = Vector3D(2.5, 6.0, 0.0);
 
+	// Carriles
+	lanes[0] = 0;
+	lanes[1] = 1;
+	lanes[2] = 2;
 
 	// Vector de COLORES de los vehículos
 	/*
@@ -129,49 +132,32 @@ void LevelOne :: init() {
 	0.5 1.0 0.5 light green
 	0.0 0.5 0.0 dark green
 	*/
-	vehicleColors.push_back(Color(0.0, 0.2, 0.8));
-	vehicleColors.push_back(Color(0.8, 0.8, 0.0));
-	vehicleColors.push_back(Color(0.0, 0.8, 0.1));
-	vehicleColors.push_back(Color(0.8, 0.3, 0.0));
-	vehicleColors.push_back(Color(0.3, 0.8, 0.6));
-	vehicleColors.push_back(Color(0.9, 0.2, 0.0));
-	vehicleColors.push_back(Color(0.3, 0.3, 0.3));
-	vehicleColors.push_back(Color(0.4, 0.8, 0.9));
+	vehicleColors[0] = Color(0.0, 0.2, 0.8);
+	vehicleColors[1] = Color(0.8, 0.8, 0.0);
+	vehicleColors[2] = Color(0.0, 0.8, 0.1);
+	vehicleColors[3] = Color(0.8, 0.3, 0.0);
+	vehicleColors[4] = Color(0.3, 0.8, 0.6);
+	vehicleColors[5] = Color(0.9, 0.2, 0.0);
+
+	random_shuffle(vehicleColors, vehicleColors + 6);
 
 	// Añadimos objetos de la clase Vehicle vector vehicles<> y le asignamos a cada uno un modelo 3D aleatorio
 	for (int i = 0; i < 3; i++) {
 		vehicles.push_back(new Vehicle());
-		Model* vehicleModelPtr = vehicleModels.at(i);
+		Model* vehicleModelPtr = vehicleModels[i];
 		vehicles[i]->setModel(vehicleModelPtr);
-		vehicles[i]->getModel().setCoordinates(vehiclePositions.at(i));
+		vehicles[i]->getModel().setCoordinates(vehiclePositions[i]);
 
-		// Guardamos en qué carril se encuentra
-		if (vehicles[i]->getModel().getCoordinates().getCoordinateX() == -2.5) { // si está en el carril de la izquierda
-			vehicles[i]->setLane(0);
-		}
-		else if (vehicles[i]->getModel().getCoordinates().getCoordinateX() == 0.0) { // si está en el carril central
-			vehicles[i]->setLane(1);
-		}
-		else { // si está en el carril de la derecha
-			vehicles[i]->setLane(2);
-		}
-
+		// Lo colocamos en su posición inicial correspondiente
+		vehicles[i]->getModel().setCoordinates(vehiclePositions[i]);
+		vehicles[i]->setInitPos(vehiclePositions[i]);
 		vehicles[i]->getModel().setOrientation(Vector3D(90.0, 0.0, 0.0));
 		vehicles[i]->getModel().setSpeed(Vector3D(0.0, 0.0, 0.0));
-	}
 
-	// Vector de booleanos de carriles ocupados
-	for (int k = 0; k < 3; k++) {
-		occupiedLanes.push_back(false);
+		// Lo coloreamos de un color aleatorio
+		vehicles[i]->getModel().paintColor(vehicleColors[i]);
 	}
 	
-	// Coloreamos los coches de manera aleatoria
-	srand(time(NULL));
-	for (int i = 0; i < vehicles.size(); i++) {
-		int randomNumber = rand() % vehicleColors.size();
-		vehicles[i]->getModel().paintColor(vehicleColors.at(randomNumber));
-	}
-
 
 	// PLAYER
 	this->player = new Player();
@@ -223,39 +209,34 @@ void LevelOne::processKeyPressed(unsigned char key, int px, int py) {
 }
 
 void LevelOne::vehicleCheck() {
+	// Comprueba si el vehículo se ha salido del carril y en ese caso, lo vuelve a enviar a su posición inicial	con otro color distinto
+	random_shuffle(vehicleColors, vehicleColors + 6);
 	for (int i = 0; i < vehicles.size(); i++) {
-		srand(time(NULL));
-		
+		Color randColor = vehicleColors[i];
+
 		if (vehicles[i]->getModel().getCoordinates().getCoordinateY() <= -6.0) {
-			occupiedLanes.at(vehicles[i]->getLane()) = false;
-			int randNumb = rand() % vehiclePositions.size();
-
-			do {
-				randNumb = rand() % vehiclePositions.size();
-			} while (occupiedLanes.at(randNumb) == true);
-
-			Vector3D newPos = vehiclePositions.at(randNumb);
-			(vehicles[i])->getModel().setCoordinates(newPos);
-			vehicles[i]->setLane(randNumb);
+			vehicles[i]->getModel().setCoordinates(vehicles[i]->getInitPos());
+			vehicles[i]->getModel().setSpeed(Vector3D(0.0, 0.0, 0.0));
+			vehicles[i]->getModel().paintColor(randColor);
 		}
 	}
 }
 
 void LevelOne::vehicleRandomizer() {
-	srand(time(NULL));
-	int randVehicle = rand() % vehicles.size();
-	int randSpeed = rand() % vehicleSpeeds.size();
-
-	if (vehicles.at(randVehicle)->getModel().getCoordinates().getCoordinateY() >= 6.0 ) {
-		(vehicles.at(randVehicle))->getModel().setSpeed(vehicleSpeeds.at(randSpeed));
-		occupiedLanes[vehicles[randVehicle]->getLane()] = true;
+	random_shuffle(lanes, lanes+3);
+	int i = lanes[1];
+	if (vehicles[i]->getModel().getCoordinates().getCoordinateY() >= 6.0) {
+		if (vehicles[i]->getModel().getSpeed().getCoordinateY() == 0.0) {
+			random_shuffle(vehicleSpeeds, vehicleSpeeds + 6);
+			vehicles[i]->getModel().setSpeed(vehicleSpeeds[1]);
+		}
 	}
 }
 
 void LevelOne::update(const float& time) {
+	vehicleCheck();
+	vehicleRandomizer();
 	for (int i = 0; i < getGameObjects().size(); i++) {
-		vehicleCheck();
-		vehicleRandomizer();
 		getGameObjects()[i]->Update(time);
 	}
 }

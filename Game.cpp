@@ -16,7 +16,6 @@ void Game::ProcessMouseClick(int button, int state, int x, int y) {
 }
 
 void Game::Init() {
-	
 	// ESCENAS DEL JUEGO
 	// Inicializamos la escena
 	InitScreen* titleScreen = new InitScreen();
@@ -29,7 +28,7 @@ void Game::Init() {
 	this->scenes.push_back(titleScreen);
 
 	// ESCENA ACTIVA
-	activeScene = titleScreen;
+	activeScene = firstLevel;
 }
 
 void Game::Render() {
@@ -37,7 +36,6 @@ void Game::Render() {
 }
 
 void Game::Update() {
-
 	milliseconds currentTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 
 	if ((currentTime.count() - this->initialMilliseconds.count()) - this->lastUpdatedTime > UPDATE_PERIOD) {
