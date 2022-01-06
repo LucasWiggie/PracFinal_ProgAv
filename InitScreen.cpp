@@ -99,6 +99,8 @@ void InitScreen::processKeyPressed(unsigned char key, int px, int py) {
 }
 
 void InitScreen::update(const float& time) {
+	this->setChangeScene(-1);
+
 	for (int i = 0; i < getGameObjects().size(); i++) {
 		getGameObjects()[i]->Update(time);
 	}

@@ -3,20 +3,19 @@
 void LevelOne :: init() {
 
 	// CÁMARA
-	Vector3D newCameraCoords = Vector3D(0, 0, 6);
+	Vector3D newCameraCoords = Vector3D(0, 0, 7.5);
 	Vector3D newCameraOrientation = Vector3D(0, 0, 0);
 	Camera* camera = new Camera(newCameraCoords, Color(0, 0, 0), newCameraOrientation, Vector3D(0, 0, 0), Vector3D(0, 0, 0));
 
 	// LOADER
 	ModelLoader* playerLoader = new ModelLoader();
-	playerLoader->setScale(0.55);
+	playerLoader->setScale(0.45);
 	ModelLoader* vehicleLoader = new ModelLoader();
-	vehicleLoader->setScale(0.55);
+	vehicleLoader->setScale(0.50);
 	ModelLoader* roadLoader = new ModelLoader();
-	roadLoader->setScale(5.0);
+	roadLoader->setScale(5.5);
 	ModelLoader* borderLoader = new ModelLoader();
-	borderLoader->setScale(5.0);
-	
+	borderLoader->setScale(5.5);
 	
 	// CARRETERA
 	this->road = new Road();
@@ -29,14 +28,13 @@ void LevelOne :: init() {
 	road->getModel().setSpeed(Vector3D(0.0, 0.0, 0.0));
 	road->getModel().paintColor(Color(0.0, 0.0, 0.0));
 
-
 	// ACERAS
 	this->leftBorder = new Border();
 	borderLoader->loadModel("3D\\sideRoad.obj");
 	Model* auxPtr2 = new Model();
 	*auxPtr2 = borderLoader->getModel();
 	leftBorder->setModel(auxPtr2);
-	leftBorder->getModel().setCoordinates(Vector3D(8.8, 0.0, -1.8));
+	leftBorder->getModel().setCoordinates(Vector3D(8.0, 0.0, -1.8));
 	leftBorder->getModel().setOrientation(Vector3D(90.0, 90.0, 0.0));
 	leftBorder->getModel().setSpeed(Vector3D(0.0, 0.0, 0.0));
 	leftBorder->getModel().paintColor(Color(0.1, 0.1, 0.1));
@@ -47,15 +45,15 @@ void LevelOne :: init() {
 	Model* auxPtr3 = new Model();
 	*auxPtr3 = borderLoader->getModel();
 	rightBorder->setModel(auxPtr3);
-	rightBorder->getModel().setCoordinates(Vector3D(-8.8, 0.0, -1.8));
+	rightBorder->getModel().setCoordinates(Vector3D(-8.0, 0.0, -1.8));
 	rightBorder->getModel().setOrientation(Vector3D(90.0, 90.0, 0.0));
 	rightBorder->getModel().setSpeed(Vector3D(0.0, 0.0, 0.0));
 	rightBorder->getModel().paintColor(Color(0.1, 0.1, 0.1));
 
 
 	// LÍMITES
-	this->boundaries.push_back(-3.0);
-	this->boundaries.push_back(3.0);
+	this->boundaries.push_back(-1.6);
+	this->boundaries.push_back(1.6);
 	this->boundaries.push_back(-3.2);
 	this->boundaries.push_back(3.2);
 
@@ -80,19 +78,19 @@ void LevelOne :: init() {
 	vehicleModels.push_back(modelAuxPtr3);
 	vehicleLoader->clear();
 
-	vehicleLoader->loadModel("3D\\normalCar2.obj");
+	/*vehicleLoader->loadModel("3D\\normalCar2.obj");
 	Model* modelAuxPtr4 = new Model();
 	*modelAuxPtr4 = vehicleLoader->getModel();
 	vehicleModels.push_back(modelAuxPtr4);
-	vehicleLoader->clear();
+	vehicleLoader->clear();*/
 
-	/*vehicleLoader->loadModel("3D\\sportsCar.obj");
+	vehicleLoader->loadModel("3D\\sportsCar.obj");
 	Model* modelAuxPtr5 = new Model();
 	*modelAuxPtr5 = vehicleLoader->getModel();
 	vehicleModels.push_back(modelAuxPtr5);
 	vehicleLoader->clear();
 
-	vehicleLoader->loadModel("3D\\sportsCar2.obj");
+	/*vehicleLoader->loadModel("3D\\sportsCar2.obj");
 	Model* modelAuxPtr6 = new Model();
 	*modelAuxPtr6 = vehicleLoader->getModel();
 	vehicleModels.push_back(modelAuxPtr6);
@@ -100,16 +98,15 @@ void LevelOne :: init() {
 
 	// Vector de posibles VELOCIDADES en el eje Y
 	vehicleSpeeds[0] = Vector3D(0.0, -0.03, 0.0);
-	vehicleSpeeds[1] = Vector3D(0.0, -0.05, 0.0);
-	vehicleSpeeds[2] = Vector3D(0.0, -0.075, 0.0);
-	vehicleSpeeds[3] = Vector3D(0.0, -0.1, 0.0);
-	vehicleSpeeds[4] = Vector3D(0.0, -0.12, 0.0);
-	vehicleSpeeds[5] = Vector3D(0.0, -0.14, 0.0);
+	vehicleSpeeds[1] = Vector3D(0.0, -0.055, 0.0);
+	vehicleSpeeds[2] = Vector3D(0.0, -0.070, 0.0);
+	vehicleSpeeds[3] = Vector3D(0.0, -0.085, 0.0);
+	
 
 	// Vector de POSICIONES en el eje X
-	vehiclePositions[0] = Vector3D(-2.5, 6.0, 0.0);
+	vehiclePositions[0] = Vector3D(-1.4, 6.0, 0.0);
 	vehiclePositions[1] = Vector3D(0.0, 6.0, 0.0);
-	vehiclePositions[2] = Vector3D(2.5, 6.0, 0.0);
+	vehiclePositions[2] = Vector3D(1.4, 6.0, 0.0);
 
 	// Carriles
 	lanes[0] = 0;
@@ -233,9 +230,24 @@ void LevelOne::vehicleRandomizer() {
 	}
 }
 
+
+
 void LevelOne::update(const float& time) {
+	this->setChangeScene(-1);
+
 	vehicleCheck();
 	vehicleRandomizer();
+	
+	// Colisiones
+	for (Vehicle* v : vehicles) {
+		if (v->detectCollision(this->player->getModelPtr())) {
+			std::cout << "COLISION DETECTADA: " << this->player->getModel().getCoordinates().getCoordinateY() << endl;			
+			for (Vehicle* car : vehicles) {
+				car->getModel().setSpeed(Vector3D(0.0, 0.0, 0.0));
+			}
+			this->setChangeScene(3);
+		}
+	}
 	for (int i = 0; i < getGameObjects().size(); i++) {
 		getGameObjects()[i]->Update(time);
 	}

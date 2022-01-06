@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "LevelOne.h"
 #include "InitScreen.h"
+#include "GameOverScreen.h"
 
 using namespace std::chrono;
 

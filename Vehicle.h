@@ -34,6 +34,7 @@ public:
 	}
 
 	void Render();
+	bool detectCollision(Model* p);
 
 };
 

@@ -8,14 +8,23 @@ class Scene
 { 
 private:
 	vector<Solid*> gameObjects;
+	int changeScene;
 
 public:
 
-	Scene() {}
+	Scene() : changeScene(-1) {};
 	Scene(vector<Solid*> newGameObjects, Vector3D newBoundary) : gameObjects(newGameObjects) {};
 
 	vector<Solid*> getGameObjects() {
 		return this->gameObjects;
+	}
+
+	int getChangeScene(){
+		return this->changeScene;
+	}
+
+	void setChangeScene(int n) {
+		this->changeScene = n;
 	}
 
 	void addGameObject(Solid*);

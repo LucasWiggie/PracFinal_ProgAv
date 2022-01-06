@@ -22,13 +22,16 @@ void Game::Init() {
 	titleScreen->init();
 	LevelOne* firstLevel = new LevelOne();
 	firstLevel->init();
+	GameOverScreen* gameOverScreen = new GameOverScreen();
+	gameOverScreen->init();
 	
 	// AÑADIR LAS ESCENAS AL JUEGO
-	this->scenes.push_back(firstLevel);
 	this->scenes.push_back(titleScreen);
-
+	this->scenes.push_back(firstLevel);
+	this->scenes.push_back(gameOverScreen);
+	
 	// ESCENA ACTIVA
-	activeScene = firstLevel;
+	activeScene = gameOverScreen;
 }
 
 void Game::Render() {
@@ -40,6 +43,12 @@ void Game::Update() {
 
 	if ((currentTime.count() - this->initialMilliseconds.count()) - this->lastUpdatedTime > UPDATE_PERIOD) {
 		this->activeScene->update(TIME_INCREMENT);
+
+		// Cambio de Escenas
+		if (this->activeScene->getChangeScene() == 3) {
+			this->activeScene = this->scenes[2];
+		}
+
 		this->lastUpdatedTime = currentTime.count() - this->initialMilliseconds.count();
 	}
 }

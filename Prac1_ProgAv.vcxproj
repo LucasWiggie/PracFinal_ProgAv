@@ -144,6 +144,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOverScreen.cpp" />
     <ClCompile Include="InitScreen.cpp" />
     <ClCompile Include="LevelOne.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameOverScreen.h" />
     <ClInclude Include="InitScreen.h" />
     <ClInclude Include="LevelOne.h" />
     <ClInclude Include="Model.h" />
