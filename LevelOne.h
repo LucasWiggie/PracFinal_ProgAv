@@ -20,10 +20,9 @@ private:
 	
 	vector<float> boundaries; // Límites del escenario en el que el jugador puede moverse
 	vector<Vehicle*> vehicles;
-	int lanes[3];
 	vector<Model*> vehicleModels;
-	Vector3D vehicleSpeeds[6];
-	Vector3D vehiclePositions[3];
+	Vector3D vehicleSpeed;
+	Vector3D vehiclePositions[5];
 	Color vehicleColors[6];
 
 public:
