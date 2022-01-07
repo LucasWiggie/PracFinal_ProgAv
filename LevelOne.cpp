@@ -102,11 +102,10 @@ void LevelOne :: init() {
 	vehicleSpeeds[2] = Vector3D(0.0, -0.070, 0.0);
 	vehicleSpeeds[3] = Vector3D(0.0, -0.085, 0.0);
 	
-
 	// Vector de POSICIONES en el eje X
-	vehiclePositions[0] = Vector3D(-1.4, 6.0, 0.0);
+	vehiclePositions[0] = Vector3D(-1.4, 8.5, 0.0);
 	vehiclePositions[1] = Vector3D(0.0, 6.0, 0.0);
-	vehiclePositions[2] = Vector3D(1.4, 6.0, 0.0);
+	vehiclePositions[2] = Vector3D(1.4, 7.0, 0.0);
 
 	// Carriles
 	lanes[0] = 0;
@@ -230,24 +229,31 @@ void LevelOne::vehicleRandomizer() {
 	}
 }
 
-
+void LevelOne::resetPositions() {
+	for (Vehicle* v : vehicles) {
+		v->getModel().setCoordinates(v->getInitPos());
+	}
+	player->getModel().setCoordinates(Vector3D(0.0, -2.0, 0.0));
+}
 
 void LevelOne::update(const float& time) {
-	this->setChangeScene(-1);
 
 	vehicleCheck();
 	vehicleRandomizer();
 	
 	// Colisiones
 	for (Vehicle* v : vehicles) {
+		// Si hay colision
 		if (v->detectCollision(this->player->getModelPtr())) {
 			std::cout << "COLISION DETECTADA: " << this->player->getModel().getCoordinates().getCoordinateY() << endl;			
 			for (Vehicle* car : vehicles) {
 				car->getModel().setSpeed(Vector3D(0.0, 0.0, 0.0));
 			}
+			this->resetPositions();
 			this->setChangeScene(3);
 		}
 	}
+
 	for (int i = 0; i < getGameObjects().size(); i++) {
 		getGameObjects()[i]->Update(time);
 	}

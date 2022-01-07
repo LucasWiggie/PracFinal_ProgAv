@@ -31,7 +31,7 @@ void Game::Init() {
 	this->scenes.push_back(gameOverScreen);
 	
 	// ESCENA ACTIVA
-	activeScene = gameOverScreen;
+	activeScene = firstLevel;
 }
 
 void Game::Render() {
@@ -47,6 +47,16 @@ void Game::Update() {
 		// Cambio de Escenas
 		if (this->activeScene->getChangeScene() == 3) {
 			this->activeScene = this->scenes[2];
+		}
+		else if (this->activeScene->getChangeScene() == 6) {
+			this->activeScene = this->scenes[0];
+		}
+		else if (this->activeScene->getChangeScene() == 1) {
+			this->activeScene = this->scenes[1];
+		}
+
+		for (Scene* s : scenes) {
+			s->setChangeScene(-1);
 		}
 
 		this->lastUpdatedTime = currentTime.count() - this->initialMilliseconds.count();

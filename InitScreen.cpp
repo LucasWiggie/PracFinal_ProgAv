@@ -96,10 +96,12 @@ void InitScreen::init() {
 void InitScreen::processKeyPressed(unsigned char key, int px, int py) {
 	cout << "Tecla pulsada: " << key << endl;
 
+	if (key == 'e') {
+		this->setChangeScene(1);
+	}
 }
 
 void InitScreen::update(const float& time) {
-	this->setChangeScene(-1);
 
 	for (int i = 0; i < getGameObjects().size(); i++) {
 		getGameObjects()[i]->Update(time);

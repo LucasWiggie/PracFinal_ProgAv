@@ -34,5 +34,6 @@ public:
 	void processKeyPressed(unsigned char key, int px, int py);
 	void vehicleRandomizer();
 	void vehicleCheck();
+	void resetPositions();
 };
 
