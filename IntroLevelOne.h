@@ -9,10 +9,10 @@
 #include "Vector3D.h"
 #include "Color.h"
 
-class InitScreen : public Scene
+class IntroLevelOne : public Scene
 {
 public:
-	InitScreen() : Scene() {};
+	IntroLevelOne() : Scene() {};
 
 	void init();
 	void update(const float& time);

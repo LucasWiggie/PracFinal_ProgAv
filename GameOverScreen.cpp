@@ -19,14 +19,14 @@ void GameOverScreen::init() {
 
 	// TITULO
 	this->title = new Text();
-	string newTitle = "GAME OVER";
+	string newTitle = "TE HAS CHOCADO!";
 	this->title->setText(newTitle);
 	this->title->setCoordinates(Vector3D(0.2, 0.3, 6.0));
 	this->title->setColor(Color(1.0, 1.0, 1.0));
 
 	// INFO
 	this->info = new Text();
-	string newInfo = "PULSE 'E' PARA VOLVER AL INICIO";
+	string newInfo = "PULSE 'E' PARA IR AL INICIO";
 	this->info->setText(newInfo);
 	this->info->setCoordinates(Vector3D(0.0, 0.0, 6.0));
 	this->info->setColor(Color(1.0, 1.0, 1.0));
@@ -57,7 +57,7 @@ void GameOverScreen::processKeyPressed(unsigned char key, int px, int py) {
 	cout << "Tecla pulsada: " << key << endl;
 	
 	if (key == 'e') {
-		this->setChangeScene(6);
+		this->setChangeScene(7);
 	}
 }
 

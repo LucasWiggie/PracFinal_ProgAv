@@ -23,12 +23,20 @@ public:
 	void update(const float& time);
 	void processKeyPressed(unsigned char key, int px, int py);
 
-	inline Text* getTitle() {
+	inline const Text* getTitle() {
 		return this->title;
+	}
+
+	inline const Text* getInfo() {
+		return this->info;
 	}
 
 	inline void setTitle(Text* titleToSet) {
 		this->title = titleToSet;
+	}
+
+	inline void setInfo(Text* infoToSet) {
+		this->info = infoToSet;
 	}
 };
 

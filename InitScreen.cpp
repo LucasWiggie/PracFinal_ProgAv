@@ -46,40 +46,39 @@ void InitScreen::init() {
 	vehicleModels[2]->paintColor(Color(0.0, 0.0, 0.8));
 
 	// TEXTO
-	this->title = new Text();
+	Text* title = new Text();
 	string newTitle = "COCHE101";
-	this->title->setText(newTitle);
-	this->title->setCoordinates(Vector3D(-0.1, 0.0, 6.0));
-	this->title->setColor(Color(1.0, 1.0, 1.0));
+	title->setText(newTitle);
+	title->setCoordinates(Vector3D(-0.1, 0.0, 6.0));
+	title->setColor(Color(1.0, 1.0, 1.0));
 
-	this->author1 = new Text();
+	Text* author1 = new Text();
 	string newAuthor1 = "Fabio Elias Rengifo Garcia";
-	this->author1->setText(newAuthor1);
-	this->author1->setCoordinates(Vector3D(0.2, -0.15, 6.0));
-	this->author1->setColor(Color(1.0, 1.0, 1.0));
+	author1->setText(newAuthor1);
+	author1->setCoordinates(Vector3D(0.2, -0.15, 6.0));
+	author1->setColor(Color(1.0, 1.0, 1.0));
 
-	this->author2 = new Text();
+	Text* author2 = new Text();
 	string newAuthor2 = "Lucas Rubio Lezana";
-	this->author2->setText(newAuthor2);
-	this->author2->setCoordinates(Vector3D(0.2, -0.21, 6.0));
-	this->author2->setColor(Color(1.0, 1.0, 1.0));
+	author2->setText(newAuthor2);
+	author2->setCoordinates(Vector3D(0.2, -0.21, 6.0));
+	author2->setColor(Color(1.0, 1.0, 1.0));
 
-	this->info = new Text();
+	Text* info = new Text();
 	string newInfo = "PULSE 'E' PARA JUGAR";
-	this->info->setText(newInfo);
-	this->info->setCoordinates(Vector3D(0.2, -0.40, 6.0));
-	this->info->setColor(Color(1.0, 1.0, 1.0));
+	info->setText(newInfo);
+	info->setCoordinates(Vector3D(0.2, -0.40, 6.0));
+	info->setColor(Color(1.0, 1.0, 1.0));
 
 	// FONDO
 	ModelLoader* backgroundLoader = new ModelLoader();
 	backgroundLoader->setScale(10.0);
 	backgroundLoader->loadModel("3D\\sideRoad.obj");
-	Model* backgroundAuxPtr = new Model();
-	*backgroundAuxPtr = backgroundLoader->getModel();
-	this->background = backgroundAuxPtr;
-	this->background->setCoordinates(Vector3D(0.0, 0.0, -3.0));
-	this->background->setOrientation(Vector3D(90.0, 0.0, 0.0));
-	this->background->paintColor(Color(0.0, 0.0, 0.0));
+	Model* background = new Model();
+	*background = backgroundLoader->getModel();
+	background->setCoordinates(Vector3D(0.0, 0.0, -3.0));
+	background->setOrientation(Vector3D(90.0, 0.0, 0.0));
+	background->paintColor(Color(0.0, 0.0, 0.0));
 
 	// AÑADIR OBJETOS
 	this->addGameObject(camera);
@@ -97,7 +96,7 @@ void InitScreen::processKeyPressed(unsigned char key, int px, int py) {
 	cout << "Tecla pulsada: " << key << endl;
 
 	if (key == 'e') {
-		this->setChangeScene(1);
+		this->setChangeScene(0);
 	}
 }
 

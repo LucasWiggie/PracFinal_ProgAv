@@ -11,7 +11,7 @@
 #include <cstdlib>
 #include <random>
 
-class LevelOne : public Scene
+class LevelTwo : public Scene
 {
 private:
 	Player* player; // jugador
@@ -20,7 +20,7 @@ private:
 	Border* rightBorder; // acera de la derecha
 	Text* meters;
 	int mCount;
-	
+
 	vector<float> boundaries; // Límites del escenario en el que el jugador puede moverse
 	vector<Vehicle*> vehicles;
 	vector<Model*> vehicleModels;
@@ -29,7 +29,7 @@ private:
 	Color vehicleColors[6];
 
 public:
-	LevelOne() : player(nullptr), road(nullptr), leftBorder(nullptr), rightBorder(nullptr), meters(nullptr), mCount(0), Scene() {}
+	LevelTwo() : player(nullptr), road(nullptr), leftBorder(nullptr), rightBorder(nullptr), meters(nullptr), mCount(0), Scene() {}
 
 	void init();
 	void update(const float& time);

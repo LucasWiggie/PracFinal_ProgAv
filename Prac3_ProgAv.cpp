@@ -8,7 +8,7 @@
 using namespace std;
 
 // CONSTANTES
-const int WINDOW_WIDTH = 800;
+const int WINDOW_WIDTH = 820;
 const int WINDOW_HEIGHT = 600;
 const int WINDOW_POSITION_X = 100;
 const int WINDOW_POSITION_Y = 100;

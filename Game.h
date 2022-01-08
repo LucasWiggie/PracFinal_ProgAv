@@ -9,7 +9,11 @@
 #include <chrono>
 #include "Text.h"
 #include "Player.h"
+#include "IntroLevelOne.h"
 #include "LevelOne.h"
+#include "IntroLevelTwo.h"
+#include "LevelTwo.h"
+#include "VictoryScreen.h"
 #include "InitScreen.h"
 #include "GameOverScreen.h"
 
