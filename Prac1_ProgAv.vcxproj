@@ -148,6 +148,7 @@
     <ClCompile Include="InitScreen.cpp" />
     <ClCompile Include="IntroLevelOne.cpp" />
     <ClCompile Include="IntroLevelTwo.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelOne.cpp" />
     <ClCompile Include="LevelTwo.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="InitScreen.h" />
     <ClInclude Include="IntroLevelOne.h" />
     <ClInclude Include="IntroLevelTwo.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="LevelOne.h" />
     <ClInclude Include="LevelTwo.h" />
     <ClInclude Include="Model.h" />

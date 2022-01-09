@@ -7,36 +7,17 @@
 #include "Border.h"
 #include "Vehicle.h"
 #include "Text.h"
+#include "Level.h"
 #include <vector>
 #include <cstdlib>
 #include <random>
 
-class LevelOne : public Scene
+class LevelOne : public Level
 {
-private:
-	Player* player; // jugador
-	Road* road; // calzada
-	Border* leftBorder; // acera de la izquierda
-	Border* rightBorder; // acera de la derecha
-	Text* meters;
-	int mCount;
-	
-	vector<float> boundaries; // Límites del escenario en el que el jugador puede moverse
-	vector<Vehicle*> vehicles;
-	vector<Model*> vehicleModels;
-	Vector3D vehicleSpeed;
-	Vector3D vehiclePositions[5];
-	Color vehicleColors[6];
-
 public:
-	LevelOne() : player(nullptr), road(nullptr), leftBorder(nullptr), rightBorder(nullptr), meters(nullptr), mCount(0), Scene() {}
+	LevelOne() : Level() {}
 
 	void init();
 	void update(const float& time);
-	void processKeyPressed(unsigned char key, int px, int py);
-	void vehicleRandomizer();
-	void vehicleCheck();
-	void updateMeters(float time);
-	void resetPositions();
 };
 

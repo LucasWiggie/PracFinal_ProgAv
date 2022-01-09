@@ -43,7 +43,7 @@ void Game::Init() {
 	this->scenes.push_back(gameOverScreen); // 6
 	
 	// ESCENA ACTIVA
-	activeScene = firstLevel;
+	activeScene = titleScreen;
 }
 
 void Game::Render() {

@@ -9,11 +9,37 @@ void LevelTwo::init() {
 
 	// CONTADOR DE KILOMETROS
 	this->meters = new Text();
-	string newTitle = to_string(mCount) + " m";
-	this->meters->setText(newTitle);
+	string newMeters = to_string(mCount) + " m";
+	this->meters->setText(newMeters);
 	this->meters->setCoordinates(Vector3D(0.5, 0.5, 6.0));
 	this->meters->setColor(Color(0.0, 0.0, 0.0));
 
+	// CONTROLES
+	Text* w = new Text();
+	string newW = "[W] = Arriba";
+	w->setText(newW);
+	w->setCoordinates(Vector3D(-0.763, -0.2, 6.0));
+	w->setColor(Color(0.0, 0.0, 0.0));
+
+	Text* s = new Text();
+	string newS = "[S] = Abajo";
+	s->setText(newS);
+	s->setCoordinates(Vector3D(-0.763, -0.3, 6.0));
+	s->setColor(Color(0.0, 0.0, 0.0));
+
+	Text* a = new Text();
+	string newA = "[A] = Izquierda";
+	a->setText(newA);
+	a->setCoordinates(Vector3D(-0.763, -0.4, 6.0));
+	a->setColor(Color(0.0, 0.0, 0.0));
+
+	Text* d = new Text();
+	string newD = "[D] = Derecha";
+	d->setText(newD);
+	d->setCoordinates(Vector3D(-0.763, -0.5, 6.0));
+	d->setColor(Color(0.0, 0.0, 0.0));
+
+	
 	// LOADER
 	ModelLoader* playerLoader = new ModelLoader();
 	playerLoader->setScale(0.5);
@@ -89,21 +115,21 @@ void LevelTwo::init() {
 	vehicleSpeed = Vector3D(0.0, -0.038, 0.0);
 
 	// Vector de POSICIONES en el eje X
-	vehiclePositions[0] = Vector3D(-1.8, 6.0, 0.0);
-	vehiclePositions[1] = Vector3D(-0.6, 6.0, 0.0);
-	vehiclePositions[2] = Vector3D(0.6, 6.0, 0.0);
-	vehiclePositions[3] = Vector3D(1.8, 6.0, 0.0);
+	vehiclePositions.push_back(Vector3D(-1.8, 6.0, 0.0));
+	vehiclePositions.push_back(Vector3D(-0.6, 6.0, 0.0));
+	vehiclePositions.push_back(Vector3D(0.6, 6.0, 0.0));
+	vehiclePositions.push_back(Vector3D(1.8, 6.0, 0.0));
 
 	// Vector de COLORES de los vehículosz
-	vehicleColors[0] = Color(0.0, 0.2, 0.8);
-	vehicleColors[1] = Color(0.8, 0.8, 0.0);
-	vehicleColors[2] = Color(0.0, 0.8, 0.1);
-	vehicleColors[3] = Color(0.8, 0.3, 0.0);
-	vehicleColors[4] = Color(0.3, 0.8, 0.6);
-	vehicleColors[5] = Color(0.9, 0.2, 0.0);
+	vehicleColors.push_back(Color(0.0, 0.2, 0.8));
+	vehicleColors.push_back(Color(0.8, 0.8, 0.0));
+	vehicleColors.push_back(Color(0.0, 0.8, 0.1));
+	vehicleColors.push_back(Color(0.8, 0.3, 0.0));
+	vehicleColors.push_back(Color(0.3, 0.8, 0.6));
+	vehicleColors.push_back(Color(0.9, 0.2, 0.0));
 
-	random_shuffle(vehicleColors, vehicleColors + 6);
-	random_shuffle(vehiclePositions, vehiclePositions + 4);
+	random_shuffle(vehicleColors.begin(), vehicleColors.end());
+	random_shuffle(vehiclePositions.begin(), vehiclePositions.end());
 
 	// Añadimos objetos de la clase Vehicle vector vehicles<> y le asignamos a cada uno un modelo 3D aleatorio
 	for (int i = 0; i < 3; i++) {
@@ -136,6 +162,11 @@ void LevelTwo::init() {
 
 	// AÑADIR OBJETOS
 	this->addGameObject(camera);
+	this->addGameObject(this->meters);
+	this->addGameObject(w);
+	this->addGameObject(s);
+	this->addGameObject(a);
+	this->addGameObject(d);
 	this->addGameObject(this->leftBorder->getModelPtr());
 	this->addGameObject(this->rightBorder->getModelPtr());
 	this->addGameObject(this->road->getModelPtr());
@@ -146,86 +177,11 @@ void LevelTwo::init() {
 
 }
 
-void LevelTwo::processKeyPressed(unsigned char key, int px, int py) {
-	cout << "Tecla pulsada: " << key << endl;
-
-	if (key == 'w') {
-		if (player->getModel().getCoordinates().getCoordinateY() < boundaries[3]) {
-			this->player->movementForward();
-		}
-	}
-	else if (key == 's') {
-		if (player->getModel().getCoordinates().getCoordinateY() > boundaries[2]) {
-			this->player->movementBack();
-		}
-	}
-	else if (key == 'a') {
-		if (player->getModel().getCoordinates().getCoordinateX() > boundaries[0]) {
-			this->player->movementLeft();
-		}
-	}
-	else if (key == 'd') {
-		if (player->getModel().getCoordinates().getCoordinateX() < boundaries[1]) {
-			this->player->movementRight();
-		}
-	}
-}
-
-void LevelTwo::vehicleCheck() {
-	int i = 0;
-	random_shuffle(vehicleColors, vehicleColors + 6);
-	random_shuffle(vehiclePositions, vehiclePositions + 4);
-
-	// Comprueba si el vehículo se ha salido del carril y en ese caso, lo vuelve a enviar a su posición inicial	con otro color distinto
-	for (Vehicle* car : vehicles) {
-		if (car->getModel().getCoordinates().getCoordinateY() <= -6.0) {
-			car->getModel().setCoordinates(vehiclePositions[i]);
-			car->getModel().setSpeed(Vector3D(0.0, 0.0, 0.0));
-			car->getModel().paintColor(vehicleColors[i]);
-		}
-		i++;
-	}
-
-	if (vehicles[0]->getModel().getCoordinates().getCoordinateY() == vehiclePositions[0].getCoordinateY() &&
-		vehicles[1]->getModel().getCoordinates().getCoordinateY() == vehiclePositions[1].getCoordinateY() &&
-		vehicles[2]->getModel().getCoordinates().getCoordinateY() == vehiclePositions[2].getCoordinateY()) {
-		vehicleSpeed = vehicleSpeed + Vector3D(0.0, -0.003, 0.0);
-	}
-}
-
-void LevelTwo::vehicleRandomizer() {
-	for (Vehicle* car : vehicles) {
-		if (car->getModel().getCoordinates().getCoordinateY() >= 6.0) {
-			if (car->getModel().getSpeed().getCoordinateY() == 0.0) {
-				car->getModel().setSpeed(vehicleSpeed);
-			}
-		}
-	}
-}
-
-void LevelTwo::updateMeters(float time) {
-	if ((int)time % 10 == 0) {
-		this->mCount++;
-		this->meters->setText(to_string(this->mCount) + " m");
-	}
-}
-
-void LevelTwo::resetPositions() {
-	random_shuffle(vehiclePositions, vehiclePositions + 5);
-	int i = 0;
-	for (Vehicle* v : vehicles) {
-		v->getModel().setCoordinates(vehiclePositions[i]);
-		i++;
-	}
-	player->getModel().setCoordinates(Vector3D(0.0, -2.0, 0.0));
-	vehicleSpeed = Vector3D(0.0, -0.038, 0.0);
-	this->mCount = 0;
-}
-
 void LevelTwo::update(const float& time) {
 
 	vehicleCheck();
 	vehicleRandomizer();
+	updateMeters(time);
 
 	// Colisiones
 	for (Vehicle* v : vehicles) {
