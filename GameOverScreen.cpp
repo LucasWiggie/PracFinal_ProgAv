@@ -10,26 +10,25 @@ void GameOverScreen::init() {
 	ModelLoader* backgroundLoader = new ModelLoader();
 	backgroundLoader->setScale(20.0);
 	backgroundLoader->loadModel("3D\\sideRoad.obj");
-	Model* backgroundAuxPtr = new Model();
-	*backgroundAuxPtr = backgroundLoader->getModel();
-	this->background = backgroundAuxPtr;
-	this->background->setCoordinates(Vector3D(0.0, 0.0, -3.0));
-	this->background->setOrientation(Vector3D(90.0, 0.0, 0.0));
-	this->background->paintColor(Color(0.0, 0.0, 0.0));
+	Model* background = new Model();
+	*background = backgroundLoader->getModel();
+	background->setCoordinates(Vector3D(0.0, 0.0, -3.0));
+	background->setOrientation(Vector3D(90.0, 0.0, 0.0));
+	background->paintColor(Color(0.0, 0.0, 0.0));
 
 	// TITULO
-	this->title = new Text();
+	Text* title = new Text();
 	string newTitle = "TE HAS CHOCADO!";
-	this->title->setText(newTitle);
-	this->title->setCoordinates(Vector3D(0.2, 0.3, 6.0));
-	this->title->setColor(Color(1.0, 1.0, 1.0));
+	title->setText(newTitle);
+	title->setCoordinates(Vector3D(0.2, 0.3, 6.0));
+	title->setColor(Color(1.0, 1.0, 1.0));
 
 	// INFO
-	this->info = new Text();
+	Text* info = new Text();
 	string newInfo = "PULSE 'E' PARA IR AL INICIO";
-	this->info->setText(newInfo);
-	this->info->setCoordinates(Vector3D(0.0, 0.0, 6.0));
-	this->info->setColor(Color(1.0, 1.0, 1.0));
+	info->setText(newInfo);
+	info->setCoordinates(Vector3D(0.0, 0.0, 6.0));
+	info->setColor(Color(1.0, 1.0, 1.0));
 
 	// VEHÍCULOS
 	ModelLoader* vehicleLoader = new ModelLoader();

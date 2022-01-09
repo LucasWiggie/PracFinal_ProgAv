@@ -61,7 +61,7 @@ void LevelOne :: init() {
 	road->getModel().paintColor(Color(0.0, 0.0, 0.0));
 
 	// ACERAS
-	this->leftBorder = new Border();
+	this->leftBorder = new Road();
 	borderLoader->loadModel("3D\\sideRoad.obj");
 	Model* auxPtr2 = new Model();
 	*auxPtr2 = borderLoader->getModel();
@@ -72,7 +72,7 @@ void LevelOne :: init() {
 	leftBorder->getModel().paintColor(Color(0.1, 0.1, 0.1));
 	borderLoader->clear();
 
-	this->rightBorder = new Border();
+	this->rightBorder = new Road();
 	borderLoader->loadModel("3D\\sideRoad.obj");
 	Model* auxPtr3 = new Model();
 	*auxPtr3 = borderLoader->getModel();

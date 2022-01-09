@@ -4,7 +4,6 @@
 #include "ModelLoader.h"
 #include "Player.h"
 #include "Road.h"
-#include "Border.h"
 #include "Vehicle.h"
 #include "Level.h"
 #include "Text.h"

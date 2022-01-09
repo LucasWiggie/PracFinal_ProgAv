@@ -96,9 +96,6 @@
     <ClCompile Include="Road.cpp">
       <Filter>Archivos de origen\Coche101</Filter>
     </ClCompile>
-    <ClCompile Include="Border.cpp">
-      <Filter>Archivos de origen\Coche101</Filter>
-    </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>Archivos de origen\Utilities</Filter>
     </ClCompile>
@@ -129,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Solid.h">
@@ -165,9 +163,6 @@
       <Filter>Archivos de encabezado\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Road.h">
-      <Filter>Archivos de encabezado\Coche101</Filter>
-    </ClInclude>
-    <ClInclude Include="Border.h">
       <Filter>Archivos de encabezado\Coche101</Filter>
     </ClInclude>
     <ClInclude Include="Vector3D.h">

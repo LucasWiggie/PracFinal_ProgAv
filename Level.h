@@ -4,7 +4,6 @@
 #include "ModelLoader.h"
 #include "Player.h"
 #include "Road.h"
-#include "Border.h"
 #include "Vehicle.h"
 #include "Text.h"
 #include <vector>
@@ -16,10 +15,10 @@ class Level : public Scene
 protected:
 	Player* player; // jugador
 	Road* road; // calzada
-	Border* leftBorder; // acera de la izquierda
-	Border* rightBorder; // acera de la derecha
+	Road* leftBorder; // acera de la izquierda
+	Road* rightBorder; // acera de la derecha
 	Text* meters; // texto que muestra los metros
-	int mCount; // contador d elos metros recorridos
+	int mCount; // contador de los metros recorridos
 
 	vector<float> boundaries; // Límites del escenario en el que el jugador puede moverse
 	vector<Vehicle*> vehicles; // vehículos de la escena

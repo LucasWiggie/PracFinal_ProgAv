@@ -17,7 +17,7 @@ void Game::ProcessMouseClick(int button, int state, int x, int y) {
 
 void Game::Init() {
 	// ESCENAS DEL JUEGO
-	// Inicializamos la escena
+	// Inicializamos las escenas
 	InitScreen* titleScreen = new InitScreen();
 	titleScreen->init();
 	IntroLevelOne* introLevelOne = new IntroLevelOne();

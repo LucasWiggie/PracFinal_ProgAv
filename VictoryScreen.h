@@ -11,7 +11,6 @@
 
 class VictoryScreen : public Scene
 {
-
 public:
 	VictoryScreen() : Scene() {};
 
