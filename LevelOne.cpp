@@ -7,7 +7,7 @@ void LevelOne :: init() {
 	Vector3D newCameraOrientation = Vector3D(0, 0, 0);
 	Camera* camera = new Camera(newCameraCoords, Color(0, 0, 0), newCameraOrientation, Vector3D(0, 0, 0), Vector3D(0, 0, 0));
 
-	// CONTADOR DE KILOMETROS
+	// CONTADOR DE METROS
 	this->meters = new Text();
 	string newMeters = to_string(mCount) + " m";
 	this->meters->setText(newMeters);
